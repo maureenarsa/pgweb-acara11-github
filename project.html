@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBGIS KABUPATEN SLEMAN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <!-- Search CSS Library -->
+    <link
+    rel="stylesheet"
+    href="assets/plugins/leaflet-search/leaflet-search.css"
+    />
+
+    <!-- Geolocation CSS Library for Plugin -->
+    <link
+    rel="stylesheet"
+    href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css"
+    />
+
+    <!-- Leaflet Mouse Position CSS Library -->
+    <link
+    rel="stylesheet"
+    href="assets/plugins/leaflet-mouseposition/L.Control.MousePosition.css"
+    />
+
+    <!-- Leaflet Measure CSS Library -->
+    <link
+    rel="stylesheet"
+    href="assets/plugins/leaflet-measure/leaflet-measure.css"
+    />
+
+    <!-- EasyPrint CSS Library -->
+    <link
+    rel="stylesheet"
+    href="assets/plugins/leaflet-easyprint/easyPrint.css"
+    />
+
+    <!-- MarkerCluster CSS Library -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-markercluster/MarkerCluster.css"/>
+    <link rel="stylesheet" href="assets/plugins/leaflet-markercluster/MarkerCluster.Default.css"/>
+
+    <!-- Routing CSS Library -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-routing/leaflet-routing-machine.css"/>
+
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#"><span class="text-warning">Explore</span> Kabupaten Sleman</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#home">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#wisata">Wisata</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#kepemerintahan">Kepemerintahan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#peta">Peta</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#tentang">Tentang</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="candi.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Explore Wisata Sleman</h5>
+              <p>Portal Explore Kabupaten Sleman</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="peta.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Explore Peta Sleman</h5>
+              <p>Portal Explore Kabupaten Sleman</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="kepanewon.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Explore Kepemerintahan Sleman</h5>
+              <p>Portal Explore Kabupaten Sleman</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+<!-- about section starts -->
+<section class="home section-padding" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+                <div class="about-img"><img alt="" class="img-fluid" src="sleman.png"></div>
+            </div>
+            <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+                <div class="about-text">
+                    <h2>Letak dan Luas Wilayah</h2>
+                    <p>Secara Geografis Kabupaten Sleman terletak diantara 110° 33′ 00″ dan 110° 13′ 00″ 
+                        Bujur Timur, 7° 34′ 51″ dan 7° 47′ 30″ Lintang Selatan. Wilayah Kabupaten Sleman sebelah 
+                        utara berbatasan dengan Kabupaten Boyolali, sebelah timur berbatasan dengan Kabupaten Klaten, 
+                        sebelah barat berbatasan dengan Kabupaten Kulon Progo dan Kabupaten Magelang, 
+                        sebelah selatan berbatasan dengan Kota Yogyakarta, Kabupaten Bantul, dan Kabupaten Gunung Kidul. Luas Wilayah 
+                        Kabupaten Sleman seluas 57.482 Ha atau 574,82 Km2 atau sekitar 18% dari luas 
+                        Provinsi Daerah Istimewa Yogyakarta 3.185,80 Km2, dengan jarak terjauh Utara – 
+                        Selatan 32 Km, Timur – Barat 35 Km. Berikut ini terdapat data luas wilayah menurut kecamatan.</p>
+                        <a class="btn btn-warning" href="https://slemankab.bps.go.id/indicator/153/103/1/luas-wilayah-menurut-kecamatan.html">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- about section Ends -->
+
+
+<!-- services section Starts -->
+<section class="wisata section-padding" id="wisata">
+    <div class="container">
+        <div class="row">
+                <div class="section-header text-center">
+                    <h2>Wisata Kabupaten Sleman</h2>
+                    <p>Jelajahi wisata yang ada di Kabupaten Sleman meliputi
+                        <br>
+                        wisata alam, wisata kuliner, wisata belanja.</p>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="card text-white text-center bg-dark pb-2">
+                    <div class="card-body">
+                        <i class="bi bi-laptop"></i>
+                        <h3 class="card-title">Wisata Alam</h3>
+                        <p class="lead">Berisi informasi terkait lokasi obyek wisata alam di Kabupaten Sleman.</p>
+                        <a href="https://exploresleman.netlify.app/database-pariwisata/obyek-wisata/all-wisata#11/-7.6898/110.3829" class="btn bg-warning text-dark">Explore Disini</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="card text-white text-center bg-dark pb-2">
+                    <div class="card-body">
+                        <i class="bi bi-journal"></i>
+                        <h3 class="card-title">Wisata Kuliner</h3>
+                        <p class="lead">Berisi informasi terkait lokasi obyek wisata kuliner di Kabupaten Sleman.</p>
+                        <a href="https://exploresleman.netlify.app/database-pariwisata/wisata-kuliner/kuliner#11/-7.6898/110.3829" class="btn bg-warning text-dark">Explore Disini</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="card text-white text-center bg-dark pb-2">
+                    <div class="card-body">
+                        <i class="bi bi-intersect"></i>
+                        <h3 class="card-title">Wisata Belanja</h3>
+                        <p class="lead">Berisi informasi terkait lokasi obyek wisata belanja di Kabupaten Sleman.</p>
+                        <a href="https://exploresleman.netlify.app/database-pariwisata/wisata-belanja/belanja#11/-7.6898/110.3829" class="btn bg-warning text-dark">Explore Disini</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- services section Ends -->
+<!-- portfolio strats -->
+<section class="kepemerintahan section-padding" id="kepemerintahan">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header text-center pb-5">
+                    <h2>Kepemerintahan Sleman</h2>
+                    <p>Berisi informasi terkait pemerintahan Kabupaten Sleman meliputi kantor kepanewon & kalurahan, jumlah anggota DPRD menurut partai politik, serta jumlah PNS menurut tingkat kepangkatan.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="card text-light text-center bg-white pb-2">
+                    <div class="card-body text-dark">
+                        <div class="img-area mb-4"><img alt="" class="img-fluid" src="kepanewon.jpg"></div>
+                        <h3 class="card-title">Kepanewon & Kalurahan</h3>
+                        <p class="lead">Berisi informasi data nama - nama kepanewon dan kalurahan wilayah Kabupaten Sleman.</p>
+                        <br>
+                        <a href="coba2.html" class="btn bg-warning text-dark">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="card text-light text-center bg-white pb-2">
+                    <div class="card-body text-dark">
+                        <div class="img-area mb-4"><img alt="" class="img-fluid" src="partai.jpeg"></div>
+                        <h3 class="card-title">Jumlah Anggota DPRD</h3>
+                        <p class="lead">Berisi informasi mengenai jumlah anggota DPRD menurut partai politik wilayah Kabupaten Sleman.</p>
+                        <a href="https://slemankab.bps.go.id/indicator/101/113/1/jumlah-anggota-dprd-menurut-partai-politik-dan-jenis-kelamin-di-kabupaten-sleman.html" class="btn bg-warning text-dark">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="card text-light text-center bg-white pb-2">
+                    <div class="card-body text-dark">
+                        <div class="img-area mb-4"><img alt="" class="img-fluid" src="pangkat.jpg"></div>
+                        <h3 class="card-title">Jumlah PNS</h3>
+                        <p class="lead">Berisi informasi mengenai jumlah PNS menurut tingkat kepangkatan wilayah Kabupaten Sleman.</p>
+                        <br>
+                        <a href="https://www.bps.go.id/indikator/indikator/view_data_pub/0000/api_pub/NzdtemNPTS95VEYzSENIYnFVb1VZZz09/da_02/1" class="btn bg-warning text-dark">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- portfolio ends -->
+
+<div class="peta section-padding" id="peta">
+                <div class="section-header text-center">
+                    <h2>Peta Sebaran Kantor Kepanewon Sleman</h2>
+                </div>
+<div id="map"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Search JavaScript Library -->
+    <script src="assets/plugins/leaflet-search/leaflet-search.js"></script>
+
+    <!-- Geolocation Javascript Library -->
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+
+    <!-- Leaflet Mouse Position JavaScript Library -->
+    <script src="assets/plugins/leaflet-mouseposition/L.Control.MousePosition.js"></script>
+
+    <!-- Leaflet Measure JavaScript Library -->
+    <script src="assets/plugins/leaflet-measure/leaflet-measure.js"></script>
+
+    <!-- EasyPrint JavaScript Library -->
+    <script src="assets/plugins/leaflet-easyprint/leaflet.easyPrint.js"></script>
+
+    <!-- Routing JavaScript Library -->
+    <script src="assets/plugins/leaflet-routing/leaflet-routing-machine.js"></script>
+    <script src="assets/plugins/leaflet-routing/leaflet-routing-machine.min.js"></script>
+
+    <!-- Markercluster JavaScript Library -->
+    <script src="assets/plugins/leaflet-markercluster/leaflet.markercluster.js"></script>
+    <script src="assets/plugins/leaflet-markercluster/leaflet.markercluster-src.js"></script>
+
+    <script>
+    var wfsgeoserver1 = L.geoJson(null, {
+        pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+            
+        });
+        },
+        onEachFeature: function (feature, layer) {
+            var content = "Kecamatan " + feature.properties.kecamatan + "<br>" +
+                    "Kabupaten : " + "Sleman" + "<br>" +
+                    "Provinsi : " + "DIY" + "<br>" +
+                    "Jumlah penduduk : " + feature.properties.jumlah;
+
+            layer.on({
+                click: function (e) {
+                    wfsgeoserver1.bindPopup(content).openPopup();
+                },
+                mouseover: function (e) {
+                    wfsgeoserver1.bindTooltip(feature.properties.nama).openTooltip();
+                },
+                mouseout: function (e) {
+                    wfsgeoserver1.closePopup();
+                    wfsgeoserver1.closeTooltip();
+                }
+            });
+        }
+    });
+
+    $.getJSON("wfsgeoserver1.php", function (data) {
+        wfsgeoserver1.addData(data);
+        wfsgeoserver1.addTo(map);
+        map.fitBounds(wfsgeoserver1.getBounds());
+
+        // Style and Popup handling
+        wfsgeoserver1.eachLayer(function (layer) {
+                var jumlah = layer.feature.properties.jumlah;
+
+                // Apply styling based on jumlah property
+                if (jumlah > 31130 && jumlah <= 51697) {
+                    layer.setStyle({
+                        fillColor: '#ffd0bb',
+                        fillOpacity: 1,
+                        weight: 1
+                    });
+                } else if (jumlah > 51698 && jumlah <= 72133) {
+                    layer.setStyle({
+                        fillColor: '#ff7f50',
+                        color: '#232323',
+                        fillOpacity: 1,
+                        weight: 1
+                    });
+                } else if (jumlah > 72134 && jumlah <= 131005) {
+                    layer.setStyle({
+                        fillColor: '#b22222',
+                        color: '#232323',
+                        fillOpacity: 1,
+                        weight: 1
+                    });
+                }
+        });
+    })
+      // Inisialisasi Peta
+    var map = L.map("map").setView([-7.7956, 110.3695], 10);
+
+      // Judul
+    var title = new L.Control();
+    title.onAdd = function (map) {
+        this._div = L.DomUtil.create("div", "info");
+        this.update();
+        return this._div;
+    };
+
+      // Legenda
+    L.Control.Legend = L.Control.extend({
+        onAdd: function (map) {
+        var img = L.DomUtil.create("img");
+        img.src = "assets/img/legend/fixlegenda.png";
+        img.style.width = "250px";
+        return img;
+        },
+    });
+    L.control.Legend = function (opts) {
+        return new L.Control.Legend(opts);
+    };
+
+    L.control.Legend({ position: "bottomleft" }).addTo(map);
+
+      // Watermark
+    L.Control.Watermark = L.Control.extend({
+        onAdd: function (map) {
+        var img = L.DomUtil.create("img");
+        img.src = "assets/img/logo/logosig.png";
+        img.style.width = "130px";
+        return img;
+        },
+    });
+    L.control.watermark = function (opts) {
+        return new L.Control.Watermark(opts);
+    };
+
+    L.control.watermark({ position: "bottomright" }).addTo(map);
+
+      // Basemap
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+        'Map data ©️ <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    var basemap1 = L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+        attribution:
+            '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href="DIVSIGUGM" target="_blank">DIVSIG UGM</a>',
+        }
+    );
+
+    var basemap2 = L.tileLayer(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+        {
+        attribution:
+            'Tiles &copy; Esri | <a href="Latihan WebGIS" target="_blank">DIVSIG UGM</a>',
+        }
+    );
+    basemap2.addTo(map);
+
+    var basemap3 = L.tileLayer(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        {
+        attribution:
+            'Tiles &copy; Esri | <a href="Lathan WebGIS" target="_blank">DIVSIG UGM</a>',
+        }
+    );
+
+    var basemap4 = L.tileLayer(
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
+        {
+        attribution:
+            '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+        }
+    );
+
+    var basemap5 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Copyright: &copy;2012 DeLorme'
+    });
+
+    var basemap6 = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.{ext}', {
+	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	ext: 'png'
+    });
+
+    var basemap7 = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain_background/{z}/{x}/{y}{r}.{ext}', {
+	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	ext: 'png'
+    });
+
+    var baseMaps = {
+        OpenStreetMap: basemap1,
+        "Esri World Street": basemap2,
+        "Esri Imagery": basemap3,
+        "Stadia Dark Mode": basemap4,
+        "EsriDeLorme" : basemap5,
+        "OSMBright" : basemap6,
+        "StamenTerrainBackground" : basemap7
+    };
+    L.control.layers(baseMaps).addTo(map);
+
+
+      // Plugin Search
+    var searchControl = new L.Control.Search({
+        position: "topleft",
+        layer: wfsgeoserver1, //Nama variabel layer
+        propertyName: "kecamatan", //Field untuk pencarian
+        marker: false,
+        moveToLocation: function (latlng, title, map) {
+        var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+        map.setView(latlng, zoom);
+        },
+    });
+    searchControl
+        .on("search:locationfound", function (e) {
+        e.layer.setStyle({
+            fillColor: "#ffff00",
+            color: "#0000ff",
+        });
+        })
+        .on("search:collapse", function (e) {
+        featuresLayer.eachLayer(function (layer) {
+            featuresLayer.resetStyle(layer);
+        });
+        });
+    map.addControl(searchControl);
+
+      /*Plugin Geolocation */
+    var locateControl = L.control
+        .locate({
+        position: "topleft",
+        drawCircle: true,
+        follow: true,
+        setView: true,
+        keepCurrentZoomLevel: false,
+        markerStyle: {
+            weight: 1,
+            opacity: 25,
+            fillOpacity: 25,
+        },
+        circleStyle: {
+            weight: 1,
+            clickable: false,
+        },
+        icon: "fas fa-crosshairs",
+        metric: true,
+        strings: {
+            title: "Click for Your Location",
+            popup: "You're here. Accuracy {distance} {unit}",
+            outsideMapBoundsMsg: "Not available",
+        },
+        locateOptions: {
+            maxZoom: 16,
+            watch: true,
+            enableHighAccuracy: true,
+            maximumAge: 10000,
+            timeout: 10000,
+        },
+        })
+        .addTo(map);
+
+      /*Plugin Mouse Position Coordinate */
+    L.control
+        .mousePosition({
+        position: "bottomright",
+        separator: ",",
+        prefix: "Point Coodinate: ",
+        })
+        .addTo(map);
+
+      /*Plugin Measurement Tool */
+    var measureControl = new L.Control.Measure({
+        position: "topleft",
+        primaryLengthUnit: "meters",
+        secondaryLengthUnit: "kilometers",
+        primaryAreaUnit: "hectares",
+        secondaryAreaUnit: "sqmeters",
+        activeColor: "#FF0000",
+        completedColor: "#00FF00",
+    });
+    measureControl.addTo(map);
+
+      /*Plugin EasyPrint */
+    L.easyPrint({
+        title: "Print",
+    }).addTo(map);
+
+    // Define custom icon Routing
+    var customIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/4127/4127800.png',
+    iconSize: [24, 24], // Adjust the size of the icon if needed
+    iconAnchor: [16, 30],
+    popupAnchor: [0, -32]
+});
+
+    /* Plugin Routing */
+    L.Routing.control({
+        waypoints: [
+            L.latLng(-7.775404417851332, 110.37630884965454),
+            L.latLng(-7.75306235653136, 110.39042320208877)
+        ],
+        routeWhileDragging: true,
+    createMarker: function (i, waypoint, n) {
+        var marker = L.marker(waypoint.latLng, {
+            draggable: true,
+            icon: customIcon, 
+        });
+        return marker;
+    }
+}).addTo(map);
+
+    // Define custom icon MarkerCluster
+var customIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/128/8996/8996796.png',
+    iconSize: [43, 43],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+});
+
+    /* Plugin MarkerCluster */
+    var addressPoint = [
+        [-7.771908875569962, 110.25361876931588, "Kantor Kepanewon Moyudan"],
+        [-7.725404857539319, 110.23478404994675, "Kantor Kepanewon Minggir"],
+        [-7.720988418783245, 110.30837970946618, "Kantor Kepanewon Seyegan"],
+        [-7.76934244120575, 110.30003218248099, "Kantor Kepanewon Godean"],
+        [-7.79541490655085, 110.32206688220413, "Kantor Kepanewon Gamping"],
+        [-7.731004085308484, 110.32933387139232, "Kantor Kepanewon Mlati"],
+        [-7.758082649007436, 110.39370313830248, "Kantor Kepanewon Depok"],
+        [-7.805149417235673, 110.44278555914002, "Kantor Kepanewon Berbah"],
+        [-7.756024463843359, 110.49009139597344, "Kantor Kepanewon Prambanan"],
+        [-7.769830606892963, 110.46691889227651, "Kantor Kepanewon Kalasan"],
+        [-7.697931885116655, 110.44521656713697, "Kantor Kepanewon Ngemplak"],
+        [-7.724015209978288, 110.40099346728108, "Kantor Kepanewon Ngaglik"],
+        [-7.683343141032531, 110.34038977903448, "Kantor Kepanewon Sleman"],
+        [-7.6509541928476805, 110.32676700576782, "Kantor Kepanewon Tempel"],
+        [-7.651061510151383, 110.36924092323508, "Kantor Kepanewon Turi"],
+        [-7.667182001123673, 110.42002100761673, "Kantor Kepanewon Pakem"],
+        [-7.65861749091683, 110.4559001567213, "Kantor Kepanewon Cangkringan"]
+    ];
+    var markers = L.markerClusterGroup();
+for (var i = 0; i < addressPoint.length; i++) {
+    var a = addressPoint[i];
+    var title1 = a[2];
+    var marker = L.marker(new L.LatLng(a[0], a[1]), {
+        title: title1,
+        icon: customIcon 
+    });
+    marker.bindPopup(title1);
+    markers.addLayer(marker);
+}
+map.addLayer(markers);
+    
+    </script>
+</div>
+
+
+
+
+<!-- Contact starts -->
+<section class="tentang section-padding" id="tentang">
+        <div class="row">
+                <div class="section-header text-center">
+                    <h2>Tentang</h2>
+                    <p><i class="fa-solid fa-square-phone"></i> Phone       : (0274) 868405</p>
+                    <p><i class="fa-solid fa-square-envelope"></i> Email        : pemdasleman@slemankab.go.id</p>
+                    <p><i class="fa-brands fa-square-instagram"></i> Instagram        : @kabarsleman</p>
+                    <p><i class="fa-brands fa-square-facebook"></i> Facebook        : pemkabsleman</p>
+                    <p><i class="fa-brands fa-chrome"></i> Website      : https://slemankab.go.id</p>
+                </div>
+        </div>
+</section>
+
+<!-- footer starts -->
+<footer class="bg-dark p-2 text-left">
+    <div class="container">
+        <p class="text-white">Dibuat Oleh : Maureen Arsa Sanda Cantika
+        <br>
+        NIM : 22/496535/SV/20972
+        <br>
+        Sistem Informasi Geografis, UGM
+        <br>
+        2023
+
+        </p>
+        
+    </div>
+</footer>
+<!-- footer ends -->
+
+<!-- All Js -->
+    <script src="js/bootstrap.bundle.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
